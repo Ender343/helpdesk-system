@@ -2,78 +2,67 @@ import { Link } from "react-router-dom";
 
 function Layout({ children }) {
 
-const user = JSON.parse(localStorage.getItem("user"));
-
 return (
 
-<div style={{display:"flex"}}>
+<div className="flex h-screen w-screen">
 
-<div style={{
-width:"250px",
-height:"100vh",
-background:"#1e293b",
-color:"white",
-padding:"20px"
-}}>
+{/* Sidebar */}
+<div className="w-60 bg-gray-900 text-white flex flex-col">
 
-<h2>HelpDesk</h2>
+<div className="p-6 text-xl font-bold border-b border-gray-700">
+HelpDesk
+</div>
 
-<p>{user?.name}</p>
+<nav className="flex-1 p-4 space-y-2">
 
-<hr/>
-
-<nav>
-
-<div>
-<Link to="/dashboard" style={{color:"white"}}>
+<Link
+to="/dashboard"
+className="block px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+>
 Dashboard
 </Link>
-</div>
 
-<br/>
-
-{user?.rol_id === 1 && (
-<>
-<div>
-<Link to="/usuarios" style={{color:"white"}}>
+<Link
+to="/usuarios"
+className="block px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+>
 Usuarios
 </Link>
-</div>
 
-<br/>
-
-<div>
-<Link to="/departamentos" style={{color:"white"}}>
+<Link
+to="/departamentos"
+className="block px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+>
 Departamentos
 </Link>
-</div>
 
-<br/>
-</>
-)}
-
-<div>
-<Link to="/tickets" style={{color:"white"}}>
+<Link
+to="/tickets"
+className="block px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+>
 Tickets
 </Link>
-</div>
 
 </nav>
 
-<br/>
+<div className="p-4 border-t border-gray-700">
 
 <button
 onClick={()=>{
-localStorage.clear();
+localStorage.removeItem("token");
 window.location.href="/";
 }}
+className="w-full bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg"
 >
 Cerrar sesión
 </button>
 
 </div>
 
-<div style={{flex:1,padding:"30px"}}>
+</div>
+
+{/* Contenido */}
+<div className="flex-1 overflow-y-auto bg-gray-200 p-6">
 
 {children}
 
